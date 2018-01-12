@@ -10,9 +10,9 @@ Resources:
         DefinitionUri: ./apispec.yaml
         Variables:
           LambdaAliasV1: v1
-          LambdaFunctionNameV1: !Ref MyLambdaFunctionV1
+          LambdaFunctionNameV1: V1-MyLambdaFunction
           LambdaAliasV2: v2
-          LambdaFunctionNameV2: !Ref MyLambdaFunctionV2
+          LambdaFunctionNameV2: V2-LambdaFunction
           LambdaAliasV3: v3
-          LambdaFunctionNameV3: !Ref MyLambdaFunctionV3
+          LambdaFunctionNameV3: V3-MyLambdaFunction
 
