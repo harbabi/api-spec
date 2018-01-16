@@ -14,11 +14,14 @@ Resources:
         DefinitionUri: ./apispec.yaml
         Variables:
           LambdaAliasV1: v1
-          LambdaFunctionNameV1: V1-MyLambdaFunction-${Branch}
+          LambdaFunctionNameV1: 
+            Fn::Sub: V1-MyLambdaFunction-${Branch}
           LambdaAliasV2: v2
-          LambdaFunctionNameV2: V2-LambdaFunction-${Branch}
+          LambdaFunctionNameV2: 
+            Fn::Sub: V2-LambdaFunction-${Branch}
           LambdaAliasV3: v3
-          LambdaFunctionNameV3: V3-MyLambdaFunction-${Branch}
+          LambdaFunctionNameV3: 
+            Fn::Sub: V3-MyLambdaFunction-${Branch}
           WebhookCustomAuthorizer: api-key-authorizer
           WebhookFunctionName: Webhook
 
