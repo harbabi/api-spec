@@ -3,7 +3,7 @@ phases:
   install:
     commands:
       - aws cloudformation package --template-file apigateway.yaml --s3-bucket test-sam2 --output-template-file newapigateway.yaml
-      - BN=$(git branch | grep \* | cut -d ' ' -f2) | sed "s/{Branch_Name}/$BN/" env.json > envoutput.json
+      - BN=$(git branch | grep \* | cut -d ' ' -f2) && sed "s/{Branch_Name}/$BN/" env.json > envoutput.json 
 artifacts:
   type: zip
   files:
