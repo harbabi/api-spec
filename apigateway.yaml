@@ -2,6 +2,10 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: API Spec
 
+Parameters:
+    Branch:
+        Type: String
+
 Resources:
   MyApi:
     Type: AWS::Serverless::Api
@@ -10,11 +14,11 @@ Resources:
         DefinitionUri: ./apispec.yaml
         Variables:
           LambdaAliasV1: v1
-          LambdaFunctionNameV1: V1-MyLambdaFunction
+          LambdaFunctionNameV1: V1-MyLambdaFunction-${Branch}
           LambdaAliasV2: v2
-          LambdaFunctionNameV2: V2-LambdaFunction
+          LambdaFunctionNameV2: V2-LambdaFunction-${Branch}
           LambdaAliasV3: v3
-          LambdaFunctionNameV3: V3-MyLambdaFunction
+          LambdaFunctionNameV3: V3-MyLambdaFunction-${Branch}
           WebhookCustomAuthorizer: api-key-authorizer
           WebhookFunctionName: Webhook
 
