@@ -15,4 +15,7 @@ Resources:
           LambdaFunctionNameV2: V2-LambdaFunction
           LambdaAliasV3: v3
           LambdaFunctionNameV3: V3-MyLambdaFunction
+          WebhookCustomAuthorizer: api-key-authorizer
+          WebhookFunctionName: Webhook
+
 

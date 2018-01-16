@@ -30,4 +30,74 @@ paths:
          type: aws_proxy
          uri: arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:462029873890:function:${stageVariables.LambdaFunctionNameV3}:${stageVariables.LambdaAliasV3}/invocations
        responses: {}
+  "/{clientId}/{apiKey}/all":
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "apiKey"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "clientId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "Events"
+        required: true
+        schema:
+          $ref: "#/definitions/Events"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      security:
+      - api-key-authorizer: []
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:462029873890:function:${stageVariables.WebhookFunctionName}/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+
+securityDefinitions:
+  api-key-authorizer:
+    type: "apiKey"
+    name: "Unused"
+    in: "header"
+    x-amazon-apigateway-authtype: "custom"
+    x-amazon-apigateway-authorizer:
+      authorizerUri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:462029873890:function:${stageVariables.WebhookCustomAuthorizer}/invocations"
+      authorizerResultTtlInSeconds: 5
+      identitySource: "context.path"
+      type: "request"
+
+definitions:
+  Empty:
+    type: "object"
+    title: "Empty Schema"
+  Events:
+    title: "Events"
+    type: "array"
+    items:
+      $ref: "#/definitions/Event"
+  Event:
+    type: "object"
+    required:
+    - "eventType"
+    properties:
+      eventType:
+        type: "string"
+      orderId:
+        type: "string"
+      message:
+        type: "string"
+    title: "Event"
 
