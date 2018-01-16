@@ -3,7 +3,7 @@ phases:
   install:
     commands:
       - aws cloudformation package --template-file apigateway.yaml --s3-bucket test-sam2 --output-template-file newapigateway.yaml
-      - sed "s/Branch_Name/develop/" envoutput.json 
+      - sed "s/{Branch_Name}/develop/" env.json > envoutput.json 
 artifacts:
   type: zip
   files:
