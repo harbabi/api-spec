@@ -6,7 +6,6 @@ phases:
 artifacts:
   type: zip
   files:
-    - newapigateway.yaml
-    - envoutput.json
+    - newtemplate.yaml
 
 
