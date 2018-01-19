@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  title: "MyBetaStack2"
+  title: "Time-API"
 schemes:
 - https
 paths:

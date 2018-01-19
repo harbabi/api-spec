@@ -18,13 +18,13 @@ Resources:
         Variables:
           LambdaAliasV1: v1
           LambdaFunctionNameV1: 
-            Fn::Sub: V1-MyLambdaFunction-${Branch}
+            Fn::Sub: V1-time-lambda2-${Branch}
           LambdaAliasV2: v2
           LambdaFunctionNameV2: 
-            Fn::Sub: V2-LambdaFunction-${Branch}
+            Fn::Sub: V2-time-lambda2-${Branch}
           LambdaAliasV3: v3
           LambdaFunctionNameV3: 
-            Fn::Sub: V3-MyLambdaFunction-${Branch}
+            Fn::Sub: V3-time-lambda2-${Branch}
           WebhookCustomAuthorizer: api-key-authorizer
           WebhookFunctionName: Webhook
 

@@ -7,5 +7,6 @@ artifacts:
   type: zip
   files:
     - newtemplate.yaml
+    - dev_params.json
 
 
