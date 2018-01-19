@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  title: "Time API"
+  title: "Time-API"
 schemes:
 - https
 paths:
