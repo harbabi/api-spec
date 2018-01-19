@@ -5,6 +5,9 @@ Description: API Spec
 Parameters:
     Branch:
         Type: String
+    Repo:
+        Type: String
+        Default: ""
 
 Resources:
   MyApi:
