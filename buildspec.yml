@@ -1,14 +1,19 @@
 version: 0.1
+environment_variables:
+    plaintext:
+        "OUTPUT_FILE": ""
+        "INPUT_FILE": ""
+        "S3_BUCKET": ""
 phases:
   install:
     commands:
       - sed "s/{AccountId}/$AccountId/" api-swagger.yaml
       - sed "s/{Region}/$Region/" api-swagger.yaml 
-      - aws cloudformation package --template-file template.yaml --s3-bucket $S3_Bucket --output-template-file newtemplate.yaml 
+      - aws cloudformation package --template $INPUT_FILE --s3-bucket $S3_BUCKET --output-template $OUTPUT_FILE
 artifacts:
   type: zip
   files:
-    - newtemplate.yaml
+    - $OUTPUT_FILE
     - dev_params.json
 
 
