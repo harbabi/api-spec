@@ -7,28 +7,28 @@ paths:
   "v1/time":
      get:
        x-amazon-apigateway-integration:
-         credentials: "arn:aws:iam::462029873890:role/Swagger-Lambda-Role"
+         credentials: "arn:aws:iam::{AccountId}:role/Swagger-Lambda-Role"
          httpMethod: POST
          type: aws_proxy
-         uri: arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:462029873890:function:${stageVariables.LambdaFunctionNameV1}:${stageVariables.LambdaAliasV1}/invocations
+         uri: arn:aws:apigateway:{Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:{Region}:{AccountId}:function:${stageVariables.LambdaFunctionNameV1}:${stageVariables.LambdaAliasV1}/invocations
        responses: {}
 
   "v2/time":
      get:
        x-amazon-apigateway-integration:
-         credentials: "arn:aws:iam::462029873890:role/Swagger-Lambda-Role"
+         credentials: "arn:aws:iam::{AccountId}:role/Swagger-Lambda-Role"
          httpMethod: POST
          type: aws_proxy
-         uri: arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:462029873890:function:${stageVariables.LambdaFunctionNameV2}:${stageVariables.LambdaAliasV2}/invocations
+         uri: arn:aws:apigateway:{Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:{Region}:{AccountId}:function:${stageVariables.LambdaFunctionNameV2}:${stageVariables.LambdaAliasV2}/invocations
        responses: {}
 
   "v3/time":
      get:
        x-amazon-apigateway-integration:
-         credentials: "arn:aws:iam::462029873890:role/Swagger-Lambda-Role"
+         credentials: "arn:aws:iam::{AccountId}:role/Swagger-Lambda-Role"
          httpMethod: POST
          type: aws_proxy
-         uri: arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:462029873890:function:${stageVariables.LambdaFunctionNameV3}:${stageVariables.LambdaAliasV3}/invocations
+         uri: arn:aws:apigateway:{Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:{Region}:{AccountId}:function:${stageVariables.LambdaFunctionNameV3}:${stageVariables.LambdaAliasV3}/invocations
        responses: {}
   "/{clientId}/{apiKey}/all":
     post:
@@ -61,7 +61,7 @@ paths:
         responses:
           default:
             statusCode: "200"
-        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:462029873890:function:${stageVariables.WebhookFunctionName}/invocations"
+        uri: "arn:aws:apigateway:{Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:{Region}:{AccountId}:function:${stageVariables.WebhookFunctionName}/invocations"
         passthroughBehavior: "when_no_match"
         httpMethod: "POST"
         contentHandling: "CONVERT_TO_TEXT"
@@ -74,7 +74,7 @@ securityDefinitions:
     in: "header"
     x-amazon-apigateway-authtype: "custom"
     x-amazon-apigateway-authorizer:
-      authorizerUri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:462029873890:function:${stageVariables.WebhookCustomAuthorizer}/invocations"
+      authorizerUri: "arn:aws:apigateway:{Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:{Region}:{AccountId}:function:${stageVariables.WebhookCustomAuthorizer}/invocations"
       authorizerResultTtlInSeconds: 5
       identitySource: "context.path"
       type: "request"

@@ -2,7 +2,9 @@ version: 0.1
 phases:
   install:
     commands:
-      - aws cloudformation package --template-file template.yaml --s3-bucket test-sam2 --output-template-file newtemplate.yaml 
+      - sed "s/{AccountId}/$AccountId/" api-swagger.yaml
+      - sed "s/{Region}/$Region/" api-swagger.yaml 
+      - aws cloudformation package --template-file template.yaml --s3-bucket $S3_Bucket --output-template-file newtemplate.yaml 
 artifacts:
   type: zip
   files:
