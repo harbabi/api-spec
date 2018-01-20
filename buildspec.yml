@@ -7,8 +7,8 @@ environment_variables:
 phases:
   install:
     commands:
-      - sed "s/{AccountId}/$AccountId/" api-swagger.yaml
-      - sed "s/{Region}/$Region/" api-swagger.yaml 
+      - sed "s/{AccountId}/$AccountId/g" api-swagger.yaml
+      - sed "s/{Region}/$Region/g" api-swagger.yaml
       - aws cloudformation package --template $INPUT_FILE --s3-bucket $S3_BUCKET --output-template $OUTPUT_FILE
 artifacts:
   type: zip
