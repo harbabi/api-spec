@@ -1,103 +1,58 @@
+---
 swagger: "2.0"
 info:
-  title: "Time-API"
+  title: "ms-id-token-api-{Environment}"
+  version: "1.0.0"
+  description: > 
+    API for posting okta access tokens and receiving id tokens
 schemes:
 - https
 paths:
-  "v1/time":
-     get:
-       x-amazon-apigateway-integration:
-         credentials: "arn:aws:iam::{AccountId}:role/Swagger-Lambda-Role"
-         httpMethod: POST
-         type: aws_proxy
-         uri: arn:aws:apigateway:{Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:{Region}:{AccountId}:function:${stageVariables.LambdaFunctionNameV1}:${stageVariables.LambdaAliasV1}/invocations
-       responses: {}
-
-  "v2/time":
-     get:
-       x-amazon-apigateway-integration:
-         credentials: "arn:aws:iam::{AccountId}:role/Swagger-Lambda-Role"
-         httpMethod: POST
-         type: aws_proxy
-         uri: arn:aws:apigateway:{Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:{Region}:{AccountId}:function:${stageVariables.LambdaFunctionNameV2}:${stageVariables.LambdaAliasV2}/invocations
-       responses: {}
-
-  "v3/time":
-     get:
-       x-amazon-apigateway-integration:
-         credentials: "arn:aws:iam::{AccountId}:role/Swagger-Lambda-Role"
-         httpMethod: POST
-         type: aws_proxy
-         uri: arn:aws:apigateway:{Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:{Region}:{AccountId}:function:${stageVariables.LambdaFunctionNameV3}:${stageVariables.LambdaAliasV3}/invocations
-       responses: {}
-  "/{clientId}/{apiKey}/all":
+  /v1/auth/id-token:
     post:
-      consumes:
-      - "application/json"
       produces:
       - "application/json"
-      parameters:
-      - name: "apiKey"
-        in: "path"
-        required: true
-        type: "string"
-      - name: "clientId"
-        in: "path"
-        required: true
-        type: "string"
-      - in: "body"
-        name: "Events"
-        required: true
-        schema:
-          $ref: "#/definitions/Events"
       responses:
         200:
           description: "200 response"
           schema:
             $ref: "#/definitions/Empty"
-      security:
-      - api-key-authorizer: []
       x-amazon-apigateway-integration:
+        credentials: "arn:aws:iam::{AccountId}:role/Swagger-Lambda-Role"      
         responses:
           default:
             statusCode: "200"
-        uri: "arn:aws:apigateway:{Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:{Region}:{AccountId}:function:${stageVariables.WebhookFunctionName}/invocations"
+        uri: "arn:aws:apigateway:{Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:{Region}:{AccountId}:function:${stageVariables.FunctionSignIDTokenV1}:v1/invocations"        
         passthroughBehavior: "when_no_match"
         httpMethod: "POST"
         contentHandling: "CONVERT_TO_TEXT"
         type: "aws_proxy"
-
-securityDefinitions:
-  api-key-authorizer:
-    type: "apiKey"
-    name: "Unused"
-    in: "header"
-    x-amazon-apigateway-authtype: "custom"
-    x-amazon-apigateway-authorizer:
-      authorizerUri: "arn:aws:apigateway:{Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:{Region}:{AccountId}:function:${stageVariables.WebhookCustomAuthorizer}/invocations"
-      authorizerResultTtlInSeconds: 5
-      identitySource: "context.path"
-      type: "request"
-
+  /v1/auth/keys:
+    get:
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        credentials: "arn:aws:iam::{AccountId}:role/Swagger-Lambda-Role"            
+        responses:
+          default:
+            statusCode: "200"
+        uri: "arn:aws:apigateway:{Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:{Region}:{AccountId}:function:${stageVariables.FunctionProvidePubKeysV1}:v1/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+        
 definitions:
   Empty:
     type: "object"
     title: "Empty Schema"
-  Events:
-    title: "Events"
-    type: "array"
-    items:
-      $ref: "#/definitions/Event"
-  Event:
-    type: "object"
-    required:
-    - "eventType"
-    properties:
-      eventType:
-        type: "string"
-      orderId:
-        type: "string"
-      message:
-        type: "string"
-    title: "Event"
-
+    
+# Added by API Auto Mocking Plugin (updated by mlf to be safe)
+basePath: /Elevate8/IdToken/1.0.0
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com

@@ -1,9 +1,4 @@
-version: 0.1
-environment_variables:
-    plaintext:
-        "OUTPUT_FILE": ""
-        "INPUT_FILE": ""
-        "S3_BUCKET": ""
+version: 0.2
 phases:
   install:
     commands:
@@ -11,11 +6,17 @@ phases:
       - more api-swagger.yaml
       - sed -i "s/{Region}/$Region/g" api-swagger.yaml
       - more api-swagger.yaml
-      - aws cloudformation package --template $INPUT_FILE --s3-bucket $S3_BUCKET --output-template $OUTPUT_FILE
+      - sed -i "s/{Branch}/$Branch/g" api-swagger.yaml
+      - more api-swagger.yaml
+      - sed -i "s/{Environment}/$Environment/g" api-swagger.yaml
+      - more api-swagger.yaml
+  build:
+    commands:
+      - aws s3 cp s3://$S3ParamBucket/$Repo/$Environment/$ParamFilename $ParamFilename
+      - aws cloudformation package --template $InputFile --s3-bucket $S3Bucket --output-template $OutputFile
+      - more $OutputFile
 artifacts:
   type: zip
   files:
-    - $OUTPUT_FILE
-    - dev_params.json
-
-
+    - $OutputFile
+    - $ParamFilename

@@ -1,31 +1,21 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: API Spec
-
+Description: core-apigateway
 Parameters:
-    Branch:
-        Type: String
-    Repo:
-        Type: String
-        Default: ""
-
+  Branch:
+    Type: String
+  Repo:
+    Type: String
+    Default: ""
+  Environment:
+    Type: String
 Resources:
-  MyApi:
+  MsIdTokenApi:
     Type: AWS::Serverless::Api
     Properties:
-        StageName: sandbox
-        DefinitionUri: ./api-swagger.yaml
-        Variables:
-          LambdaAliasV1: v1
-          LambdaFunctionNameV1: 
-            Fn::Sub: V1-time-lambda2-${Branch}
-          LambdaAliasV2: v2
-          LambdaFunctionNameV2: 
-            Fn::Sub: V2-time-lambda2-${Branch}
-          LambdaAliasV3: v3
-          LambdaFunctionNameV3: 
-            Fn::Sub: V3-time-lambda2-${Branch}
-          WebhookCustomAuthorizer: api-key-authorizer
-          WebhookFunctionName: Webhook
-
+      StageName: default
+      DefinitionUri: ./api-swagger.yaml
+      Variables:
+        baseUrl:
+          Fn::Sub: 123-${Environment}
 
