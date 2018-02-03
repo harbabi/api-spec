@@ -10,7 +10,7 @@ Parameters:
   Environment:
     Type: String
 Resources:
-  MsIdTokenApi:
+  ElevateApi:
     Type: AWS::Serverless::Api
     Properties:
       StageName: default
