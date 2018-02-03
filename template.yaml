@@ -17,5 +17,5 @@ Resources:
       DefinitionUri: ./api-swagger.yaml
       Variables:
         baseUrl:
-          Fn::Sub: 123-${Environment}
+          Fn::Sub: 123-${Environment}.cc
 

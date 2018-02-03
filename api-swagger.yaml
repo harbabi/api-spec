@@ -2,8 +2,9 @@
 swagger: "2.0"
 info:
   version: "1.0.0"
-  title: "ElevateApi-production"
-host: "api.elevateapp.cc"
+  title: "ElevateApi-{Environment}"
+  description: > 
+    API Elevate-Core
 schemes:
 - "https"
 paths:
@@ -38813,3 +38814,8 @@ x-amazon-apigateway-documentation:
       statusCode: "500"
     properties:
       description: "500 response"
+      
+# Added by API Auto Mocking Plugin (updated by mlf to be safe)
+basePath: /Elevate8/IdToken/1.0.0
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
